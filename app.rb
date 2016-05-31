@@ -1,4 +1,5 @@
 require 'shoes'
+require './lib/engine'
 
 Shoes.app(title: 'Toy Robot Simulator') do
 
@@ -20,10 +21,12 @@ Shoes.app(title: 'Toy Robot Simulator') do
         end
         @vertical_offset +=60
       end
+
+      @toy_robot = oval(left: 10, top: 10, radius: 20, fill: black)
+      @toy_robot.move(10, 60*4+10) #place in initial position
     end
 
     stack(top: 350) do
-      fill nil
       para "Enter Command"
       flow do
         edit_line
