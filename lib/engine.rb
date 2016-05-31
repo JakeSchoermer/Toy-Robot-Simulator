@@ -4,21 +4,21 @@ class Engine
   attr_reader :y
   attr_reader :orientation
 
-  @valid_orientations = ['NORTH', 'EAST', 'SOUTH', 'WEST']
-
   def initialize
     @x = 0
     @y = 0
+    @valid_orientations = ['NORTH', 'EAST', 'SOUTH', 'WEST']
     @orientation = 'NORTH'
+    @placed = false;
   end
 
   def command(input)
     if input == "MOVE"
       move
     elsif input == "LEFT"
-
+      left
     elsif input == "RIGHT"
-
+      right
     elsif input == "REPORT"
       report
     elsif /PLACE \d,\d,(NORTH|WEST|SOUTH|EAST)/.match(input)
@@ -27,12 +27,6 @@ class Engine
   end
 
     private
-
-    def place(x, y, f)
-      @x = x
-      @y = y
-      @orientation = f
-    end
 
     def move
       if @orientation == 'NORTH'
@@ -46,8 +40,27 @@ class Engine
       end
     end
 
+    def left
+      @orientation = @valid_orientations[@valid_orientations.index(@orientation)-1]
+    end
+
+    def right
+      @orientation = @valid_orientations[@valid_orientations.index(@orientation)+1]
+    end
+
     def report
       return "Output: #{x}, #{y}, #{orientation}"
+    end
+
+    def place(x, y, f)
+      if (@placed == false)
+        @x = x
+        @y = y
+        @orientation = f
+        @placed = true
+      else
+        raise 'Cannot Place Robot Toy More than Once'
+      end
     end
 
 end

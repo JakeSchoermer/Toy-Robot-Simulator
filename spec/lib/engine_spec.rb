@@ -18,6 +18,28 @@ RSpec.describe do
 
   end
 
+  describe '#move' do
+    it 'moves forward one step' do
+      @engine.command('MOVE')
+      expect(@engine.y).to eql 1
+      expect(@engine.x).to eql 0
+    end
+  end
+
+  describe '#left' do
+    it 'rotates left from North' do
+      @engine.command('LEFT')
+      expect(@engine.orientation).to eql 'WEST'
+    end
+  end
+
+  describe '#right' do
+    it 'rotates right from North' do
+      @engine.command('RIGHT')
+      expect(@engine.orientation).to eql 'EAST'
+    end
+  end
+
   describe '#report' do
     context 'new engine instance' do
       it 'should return a default co-ords facing north' do
@@ -33,14 +55,14 @@ RSpec.describe do
       expect(@engine.y).to eql 3
       expect(@engine.orientation).to eql 'WEST'
     end
-  end
 
-  describe '#move' do
-    it 'moves forward one step' do
-      @engine.command('MOVE')
-      expect(@engine.y).to eql 1
-      expect(@engine.x).to eql 0
+    it 'cannot place the robot more than once' do
+      @engine.command('PLACE 2,3,WEST')
+      expect {
+        @engine.command('PLACE 2,3,WEST')
+      }.to raise_error(RuntimeError, 'Cannot Place Robot Toy More than Once')
     end
   end
+
 
 end
