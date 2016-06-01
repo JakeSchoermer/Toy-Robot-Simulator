@@ -3,12 +3,15 @@ GEM
   specs:
     after_do (0.4.0)
     diff-lcs (1.2.5)
+    faker (1.6.3)
+      i18n (~> 0.5)
     fit-commit (3.5.0)
       swearjar (~> 1.0)
     furoshiki (0.3.1)
       plist
       rubyzip (>= 1.0.0)
       warbler (~> 1.4.4)
+    i18n (0.7.0)
     jruby-jars (1.7.25)
     jruby-rack (1.1.20)
     mini_portile (0.6.2)
@@ -61,6 +64,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  faker
   fit-commit
   rspec
   shoes (~> 4.0.0.pre5)

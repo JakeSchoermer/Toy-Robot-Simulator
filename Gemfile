@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 
 gem 'shoes', '~> 4.0.0.pre5'
 
-group :development, :test do
-  gem 'rspec'
-  gem 'fit-commit'
-end
+gem 'rspec'
+gem 'faker'
+gem 'fit-commit'

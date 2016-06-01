@@ -23,6 +23,8 @@ class Engine
       report
     elsif /PLACE (-)?\d*,(-)?\d*,(NORTH|WEST|SOUTH|EAST)/.match(input)
       place(input.split[1].split(',')[0].to_i, input.split[1].split(',')[1].to_i, input.split[1].split(',')[2])
+    else
+      raise 'Invalid Command Entered'
     end
   end
 

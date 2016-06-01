@@ -1,4 +1,5 @@
 require './lib/engine'
+require 'faker'
 
 RSpec.describe do
 
@@ -16,6 +17,14 @@ RSpec.describe do
       expect(@engine.y).to eql 0
     end
 
+  end
+
+  describe 'invalid commands' do
+    it 'Random words fail' do
+      expect {
+        @engine.command(Faker::Lorem.word)
+      }.to raise_error(RuntimeError, 'Invalid Command Entered')
+    end
   end
 
   describe '#move' do
