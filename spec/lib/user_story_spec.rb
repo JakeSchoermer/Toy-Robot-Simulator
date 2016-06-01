@@ -16,8 +16,9 @@ RSpec.describe do
       @engine.command('MOVE')
     end
 
-    it 'reports the correct location' do
-      expect(@engine.command('REPORT')).to eql 'Output: 0,1,NORTH'
+    it 'adds the correct report to the log' do
+      @engine.command('REPORT')
+      expect(@engine.log.last).to eql 'Output: 0,1,NORTH'
     end
 
     it 'the engine object reports the correct x coord' do
@@ -42,8 +43,9 @@ RSpec.describe do
       @engine.command('MOVE')
     end
 
-    it 'reports the correct location' do
-      expect(@engine.command('REPORT')).to eql 'Output: 0,0,WEST'
+    it 'adds the correct report to the log' do
+      @engine.command('REPORT')
+      expect(@engine.log.last).to eql 'Output: 0,0,WEST'
     end
 
     it 'the engine object reports the correct x coord' do
@@ -70,8 +72,9 @@ RSpec.describe do
       @engine.command('MOVE')
     end
 
-    it 'reports the correct location' do
-      expect(@engine.command('REPORT')).to eql 'Output: 3,3,NORTH'
+    it 'adds the correct report to the log' do
+      @engine.command('REPORT')
+      expect(@engine.log.last).to eql 'Output: 3,3,NORTH'
     end
 
     it 'the engine object reports the correct x coord' do

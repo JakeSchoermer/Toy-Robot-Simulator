@@ -21,9 +21,8 @@ RSpec.describe do
 
   describe 'invalid commands' do
     it 'Random words fail' do
-      expect {
-        @engine.command(Faker::Lorem.word)
-      }.to raise_error(RuntimeError, 'Invalid Command Entered')
+      @engine.command(Faker::Lorem.word)
+      expect(@engine.log.last).to eql 'Invalid Command Entered'
     end
   end
 
@@ -66,7 +65,8 @@ RSpec.describe do
   describe '#report' do
     context 'new engine instance' do
       it 'should return a default co-ords facing north' do
-        expect(@engine.command("REPORT")).to eql "Output: 0,0,NORTH"
+        expect(@engine.command("REPORT")).to be_truthy
+        expect(@engine.log.last).to eql "Output: 0,0,NORTH"
       end
     end
   end
@@ -85,31 +85,26 @@ RSpec.describe do
 
     it 'cannot place the robot more than once' do
       @engine.command('PLACE 2,3,WEST')
-      expect {
-        @engine.command('PLACE 2,3,WEST')
-      }.to raise_error(RuntimeError, 'Cannot Place Robot Toy More than Once')
+      @engine.command('PLACE 2,3,WEST')
+      expect(@engine.log.last).to eql 'Cannot Place Robot Toy More than Once'
     end
 
     context 'invalid bounds' do
       it 'x coord is too low' do
-        expect {
-          @engine.command('PLACE -1,0,NORTH')
-        }.to raise_error(RuntimeError, 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries')
+        @engine.command('PLACE -1,0,NORTH')
+        expect(@engine.log.last).to eql 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries'
       end
       it 'x coord is too high' do
-        expect {
-          @engine.command('PLACE 5,0,NORTH')
-        }.to raise_error(RuntimeError, 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries')
+        @engine.command('PLACE 5,0,NORTH')
+        expect(@engine.log.last).to eql 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries'
       end
       it 'x coord is too low' do
-        expect {
-          @engine.command('PLACE 0,-1,NORTH')
-        }.to raise_error(RuntimeError, 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries')
+        @engine.command('PLACE 0,-1,NORTH')
+        expect(@engine.log.last).to eql 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries'
       end
       it 'y coord is too high' do
-        expect {
-          @engine.command('PLACE 0,5,NORTH')
-        }.to raise_error(RuntimeError, 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries')
+        @engine.command('PLACE 0,5,NORTH')
+        expect(@engine.log.last).to eql 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries'
       end
     end
   end
