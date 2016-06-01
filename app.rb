@@ -22,6 +22,18 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
     token.displace(x_pixel_pos, y_pixel_pos)
   end
 
+  def set_token_orientation(token)
+    if @engine.orientation == "NORTH"
+      @token.path = 'assets/token_north.png'
+    elsif @engine.orientation == "EAST"
+      @token.path = 'assets/token_east.png'
+    elsif @engine.orientation == "SOUTH"
+      @token.path = 'assets/token_south.png'
+    elsif @engine.orientation == "WEST"
+      @token.path = 'assets/token_east.png'
+    end
+  end
+
   def refresh_log(text_box)
      text_box.replace @engine.log.join('\n')
   end
@@ -45,7 +57,7 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
         vertical_offset +=100
       end
 
-      @token = image 'assets/token.png'
+      @token = image 'assets/token_north.png'
       @token.displace(@token_start_x_pixel_pos, @token_start_y_pixel_pos) #place in initial position
       # @token.hide
     end
@@ -69,6 +81,9 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
 
               # Move token
               move_token(@token)
+
+              # Update Orientation
+              set_token_orientation(@token)
 
               if @engine.placed
                 @token.show
