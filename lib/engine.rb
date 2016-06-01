@@ -3,6 +3,8 @@ class Engine
   attr_reader :x
   attr_reader :y
   attr_reader :orientation
+  attr_reader :placed
+  attr_reader :log
 
   def initialize
     @x = 0
@@ -10,6 +12,7 @@ class Engine
     @valid_orientations = ['NORTH', 'EAST', 'SOUTH', 'WEST']
     @orientation = 'NORTH'
     @placed = false;
+    @log = ['Starting Engines!']
   end
 
   def command(input)
@@ -73,6 +76,8 @@ class Engine
         @y = y
         @orientation = f
         @placed = true
+
+        return [@x, @y, @orientation]
       else
         raise 'Cannot Place Robot Toy More than Once'
       end

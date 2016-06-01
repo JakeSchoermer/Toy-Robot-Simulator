@@ -1,7 +1,7 @@
 # README
 This is a really basic JRUBY GUI Toy Robot Simulator.
 
-# Running this App
+## Running this App
 This app must be run with JRUBY. A `.ruby-version` file is included for rbenv and rvm users.
 
 To run this app:
@@ -14,11 +14,11 @@ To run this app:
 5. Install the relevant gems. `bundle install`
 6. Run the included shell script to start the app `./run.sh`
 
-# Running Specs
+## Running Specs
 The bundle process will install rspec. Once this has been done, you can run the included specs.
 
 `rspec spec`
 
-# Credits
+## Credits
 
 Written by [Jake Schoermer](mailto:hello@jakeschoermer.me).

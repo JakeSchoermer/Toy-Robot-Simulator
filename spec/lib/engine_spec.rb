@@ -79,6 +79,10 @@ RSpec.describe do
       expect(@engine.orientation).to eql 'WEST'
     end
 
+    it 'places the robot in the correct place and returns the correct vals' do
+      expect(@engine.command('PLACE 2,3,WEST')).to eql([2, 3, 'WEST'])
+    end
+
     it 'cannot place the robot more than once' do
       @engine.command('PLACE 2,3,WEST')
       expect {
