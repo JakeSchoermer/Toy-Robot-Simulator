@@ -49,7 +49,7 @@ class Engine
     end
 
     def report
-      return "Output: #{x}, #{y}, #{orientation}"
+      return "Output: #{x},#{y},#{orientation}"
     end
 
     def place(x, y, f)

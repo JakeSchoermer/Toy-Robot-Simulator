@@ -57,7 +57,7 @@ RSpec.describe do
   describe '#report' do
     context 'new engine instance' do
       it 'should return a default co-ords facing north' do
-        expect(@engine.command("REPORT")).to eql "Output: 0, 0, NORTH"
+        expect(@engine.command("REPORT")).to eql "Output: 0,0,NORTH"
       end
     end
   end
