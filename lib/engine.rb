@@ -28,7 +28,7 @@ class Engine
     elsif /PLACE (-)?\d*,(-)?\d*,(NORTH|WEST|SOUTH|EAST)/.match(input)
       place(input.split[1].split(',')[0].to_i, input.split[1].split(',')[1].to_i, input.split[1].split(',')[2])
     else
-      raise 'Invalid Command Entered'
+      @log << 'Invalid Command Entered'
     end
   end
 
@@ -46,10 +46,10 @@ class Engine
         x = @x-1
       end
 
-      if x > 0 && x < 5
+      if x >= 0 && x < 5
         @x = x
       end
-      if y > 0 && y < 5
+      if y >= 0 && y < 5
         @y = y
       end
 
@@ -70,7 +70,7 @@ class Engine
     def place(x, y, f)
       if (@placed == false)
         if (x < 0 || x > 4 || y < 0|| y > 4)
-          raise 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries'
+          @log << 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries'
         end
 
         @x = x

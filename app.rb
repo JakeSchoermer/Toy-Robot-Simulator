@@ -6,7 +6,7 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
   #Init Game Engine
   @engine = Engine.new
   @token_start_x_pixel_pos = 0
-  @token_start_y_pixel_pos = 0
+  @token_start_y_pixel_pos = 400
 
   # Methods - to be moved to module
   def move_token(token)
@@ -17,12 +17,22 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
     puts "================"
 
     x_pixel_pos = @token_start_x_pixel_pos + @engine.x*100
-    y_pixel_pos = @token_start_y_pixel_pos + @engine.y*100
+    y_pixel_pos = (@token_start_y_pixel_pos - @engine.y*100)
+
+    puts "================"
+    puts "X Pixel Pos: #{x_pixel_pos}"
+    puts "Y Pixel Pos: #{y_pixel_pos}"
+    puts "================"
 
     token.displace(x_pixel_pos, y_pixel_pos)
   end
 
   def set_token_orientation(token)
+
+    puts "================"
+    puts "Orientation: #{@engine.orientation}"
+    puts "================"
+
     if @engine.orientation == "NORTH"
       @token.path = 'assets/token_north.png'
     elsif @engine.orientation == "EAST"
@@ -30,12 +40,19 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
     elsif @engine.orientation == "SOUTH"
       @token.path = 'assets/token_south.png'
     elsif @engine.orientation == "WEST"
-      @token.path = 'assets/token_east.png'
+      @token.path = 'assets/token_west.png'
     end
   end
 
   def refresh_log(text_box)
-     text_box.replace @engine.log.join('\n')
+    string = <<-FOO
+    FOO
+
+    @engine.log.each do |item|
+      string << "#{item}\n"
+    end
+
+    text_box.replace(string)
   end
 
   stack margin: 5 do
@@ -59,7 +76,7 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
 
       @token = image 'assets/token_north.png'
       @token.displace(@token_start_x_pixel_pos, @token_start_y_pixel_pos) #place in initial position
-      # @token.hide
+      @token.hide
     end
 
     stack(top: 580) do
