@@ -76,6 +76,29 @@ RSpec.describe do
         @engine.command('PLACE 2,3,WEST')
       }.to raise_error(RuntimeError, 'Cannot Place Robot Toy More than Once')
     end
+
+    context 'invalid bounds' do
+      it 'x coord is too low' do
+        expect {
+          @engine.command('PLACE -1,0,NORTH')
+        }.to raise_error(RuntimeError, 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries')
+      end
+      it 'x coord is too high' do
+        expect {
+          @engine.command('PLACE 5,0,NORTH')
+        }.to raise_error(RuntimeError, 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries')
+      end
+      it 'x coord is too low' do
+        expect {
+          @engine.command('PLACE 0,-1,NORTH')
+        }.to raise_error(RuntimeError, 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries')
+      end
+      it 'y coord is too high' do
+        expect {
+          @engine.command('PLACE 0,5,NORTH')
+        }.to raise_error(RuntimeError, 'Cannot Place Robot Toy Robot Outside of the Board\'s Boundaries')
+      end
+    end
   end
 
 
