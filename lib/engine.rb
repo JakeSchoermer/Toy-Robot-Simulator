@@ -16,6 +16,7 @@ class Engine
   end
 
   def command(input)
+    @log << input
     if input == "MOVE"
       move
     elsif input == "LEFT"

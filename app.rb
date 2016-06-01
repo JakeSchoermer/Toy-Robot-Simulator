@@ -1,17 +1,17 @@
 require 'shoes'
 require './lib/engine'
 
-Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable: false) do
+app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable: false) do
 
   #Init Game Engine
   @engine = Engine.new
 
+  # Methods - to be moved to module
   def move_token(token, start_x, start_y, end_x, end_y, start_orientation, end_orientation)
     puts start_x
     puts end_x
     puts start_y
     puts end_y
-
 
     x_delta = (start_x + end_x) * 100
     y_delta = (start_y + end_y) * 100
@@ -49,33 +49,38 @@ Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable: fals
       end
 
       @token = image 'assets/token.png'
-      # move_token(@token, x, y, @engine.x, @engine.y, nil, nil)
+      # AppInterfaceHelper.move_token(@token, x, y, @engine.x, @engine.y, nil, nil)
       @token.displace(0, 400) #place in initial position
       @token.hide
     end
 
-    stack(top: 570) do
-      flow do
-        para "Enter Command"
-        flow do
-          command_box = edit_line
-          @submit_btn = button "Submit"
-          @submit_btn.click do
-            @engine.command(command_box.text)
+    stack(top: 580) do
+      # flow do
+      #   subtitle "Test 1"
+      #   subtitle "Test 2"
+      # end
 
-            if @engine.placed
-              @token.show
+      # background green
+      flow do
+        stack width: 385 do
+          subtitle "Enter Command"
+          flow do
+            command_box = edit_line
+            @submit_btn = button "Submit"
+            @submit_btn.click do
+              @engine.command(command_box.text)
+
+              if @engine.placed
+                @token.show
+              end
+              refresh_log(@log)
             end
-
           end
-
         end
-      end
-      flow do
-        flow do
-          subitle = "Command Log"
-          log = caption
-          refresh_log(log)
+        stack width: 385 do
+          subtitle "Command Log"
+          @log = caption
+          refresh_log(@log)
         end
       end
     end
