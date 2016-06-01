@@ -64,7 +64,8 @@ class Engine
     end
 
     def report
-      return "Output: #{x},#{y},#{orientation}"
+      log << "Output: #{x},#{y},#{orientation}"
+      return true
     end
 
     def place(x, y, f)

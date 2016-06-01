@@ -45,8 +45,8 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
   end
 
   def refresh_log(text_box)
-    string = <<-FOO
-    FOO
+    string = <<-EOF
+    EOF
 
     @engine.log.each do |item|
       string << "#{item}\n"
@@ -89,7 +89,7 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
             command_box = edit_line
             @submit_btn = button "Submit"
             @submit_btn.click do
-
+              
               start_x = @engine.x
               start_y = @engine.y
               start_orientation = @engine.orientation
