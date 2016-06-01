@@ -29,15 +29,24 @@ class Engine
     private
 
     def move
+      x, y = @x, @y
       if @orientation == 'NORTH'
-        @y += 1
+        y = @y+1
       elsif @orientation == 'EAST'
-        @x += 1
+        x = @x+1
       elsif @orientation == 'SOUTH'
-        @y -= 1
+        y = @y-1
       elsif @orientation == 'WEST'
-        @x -= 1
+        x = @x-1
       end
+
+      if x > 0 && x < 6
+        @x = x
+      end
+      if y > 0 && y < 6
+        @y = y
+      end
+
     end
 
     def left
