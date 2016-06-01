@@ -59,4 +59,32 @@ RSpec.describe do
     end
   end
 
+  describe 'Story 3' do
+
+    # Story
+    before do
+      @engine.command('PLACE 1,2,EAST')
+      @engine.command('MOVE')
+      @engine.command('MOVE')
+      @engine.command('LEFT')
+      @engine.command('MOVE')
+    end
+
+    it 'reports the correct location' do
+      expect(@engine.command('REPORT')).to eql 'Output: 3,3,NORTH'
+    end
+
+    it 'the engine object reports the correct x coord' do
+      expect(@engine.x).to eql 3
+    end
+
+    it 'the engine object reports the correct y coord' do
+      expect(@engine.y).to eql 3
+    end
+
+    it 'the engine object reports the correct orientation' do
+      expect(@engine.orientation).to eql 'NORTH'
+    end
+  end
+
 end
