@@ -1,7 +1,7 @@
 require 'shoes'
 require './lib/engine'
 
-Shoes.app(title: 'Toy Robot Simulator') do
+Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable: false) do
 
   stack margin: 5 do
     stack do
@@ -14,19 +14,21 @@ Shoes.app(title: 'Toy Robot Simulator') do
         @horizontal_offset = 0
         5.times do
           flow do
-            fill red
-            rect(width: 60, left: @horizontal_offset, top: @vertical_offset)
-            @horizontal_offset+=60
+            fill seashell
+            rect(width: 100, left: @horizontal_offset, top: @vertical_offset)
+            @horizontal_offset+=100
           end
         end
-        @vertical_offset +=60
+        @vertical_offset +=100
       end
 
-      @toy_robot = oval(left: 10, top: 10, radius: 20, fill: black)
-      @toy_robot.move(10, 60*4+10) #place in initial position
+      # @toy_robot = oval(left: 10, top: 10, radius: 20, fill: black)
+      @token = image 'assets/token.png'
+
+      @token.move(0, 100*4) #place in initial position
     end
 
-    stack(top: 350) do
+    stack(top: 550) do
       para "Enter Command"
       flow do
         edit_line
