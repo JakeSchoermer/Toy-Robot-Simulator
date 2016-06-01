@@ -8,31 +8,14 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
   @token_start_x_pixel_pos = 0
   @token_start_y_pixel_pos = 400
 
-  # Methods - to be moved to module
+  # Methods
   def move_token(token)
-
-    puts "================"
-    puts "X: #{@engine.x}"
-    puts "Y: #{@engine.y}"
-    puts "================"
-
     x_pixel_pos = @token_start_x_pixel_pos + @engine.x*100
     y_pixel_pos = (@token_start_y_pixel_pos - @engine.y*100)
-
-    puts "================"
-    puts "X Pixel Pos: #{x_pixel_pos}"
-    puts "Y Pixel Pos: #{y_pixel_pos}"
-    puts "================"
-
     token.displace(x_pixel_pos, y_pixel_pos)
   end
 
   def set_token_orientation(token)
-
-    puts "================"
-    puts "Orientation: #{@engine.orientation}"
-    puts "================"
-
     if @engine.orientation == "NORTH"
       @token.path = 'assets/token_north.png'
     elsif @engine.orientation == "EAST"
@@ -75,21 +58,20 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
       end
 
       @token = image 'assets/token_north.png'
-      @token.displace(@token_start_x_pixel_pos, @token_start_y_pixel_pos) #place in initial position
-      @token.hide
+      @token.displace(@token_start_x_pixel_pos, @token_start_y_pixel_pos) # place in initial position
+      @token.hide # hidden until placed
     end
 
     stack(top: 580) do
-
-      # background green
       flow do
+        nofill
         stack width: 385 do
           subtitle "Enter Command"
           flow do
             command_box = edit_line
             @submit_btn = button "Submit"
             @submit_btn.click do
-              
+
               start_x = @engine.x
               start_y = @engine.y
               start_orientation = @engine.orientation
