@@ -46,10 +46,10 @@ class Engine
         x = @x-1
       end
 
-      if x > 0 && x < 4
+      if x > 0 && x < 5
         @x = x
       end
-      if y > 0 && y < 4
+      if y > 0 && y < 5
         @y = y
       end
 
@@ -80,7 +80,8 @@ class Engine
 
         return [@x, @y, @orientation]
       else
-        raise 'Cannot Place Robot Toy More than Once'
+        # raise 'Cannot Place Robot Toy More than Once'
+        @log << 'Cannot Place Robot Toy More than Once'
       end
     end
 

@@ -5,24 +5,21 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
 
   #Init Game Engine
   @engine = Engine.new
+  @token_start_x_pixel_pos = 0
+  @token_start_y_pixel_pos = 0
 
   # Methods - to be moved to module
-  def move_token(token, start_x, start_y, end_x, end_y, start_orientation, end_orientation)
-    puts start_x
-    puts end_x
-    puts start_y
-    puts end_y
+  def move_token(token)
 
-    x_delta = (start_x + end_x) * 100
-    y_delta = (start_y + end_y) * 100
+    puts "================"
+    puts "X: #{@engine.x}"
+    puts "Y: #{@engine.y}"
+    puts "================"
 
-    #y_delta = 10
-    puts x_delta
-    puts y_delta
+    x_pixel_pos = @token_start_x_pixel_pos + @engine.x*100
+    y_pixel_pos = @token_start_y_pixel_pos + @engine.y*100
 
-    puts token
-
-    token.displace(x_delta, 100)
+    token.displace(x_pixel_pos, y_pixel_pos)
   end
 
   def refresh_log(text_box)
@@ -49,16 +46,11 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
       end
 
       @token = image 'assets/token.png'
-      # AppInterfaceHelper.move_token(@token, x, y, @engine.x, @engine.y, nil, nil)
-      @token.displace(0, 400) #place in initial position
-      @token.hide
+      @token.displace(@token_start_x_pixel_pos, @token_start_y_pixel_pos) #place in initial position
+      # @token.hide
     end
 
     stack(top: 580) do
-      # flow do
-      #   subtitle "Test 1"
-      #   subtitle "Test 2"
-      # end
 
       # background green
       flow do
@@ -68,11 +60,20 @@ app = Shoes.app(title: 'Toy Robot Simulator', width: 800, height: 800, resizable
             command_box = edit_line
             @submit_btn = button "Submit"
             @submit_btn.click do
+
+              start_x = @engine.x
+              start_y = @engine.y
+              start_orientation = @engine.orientation
+
               @engine.command(command_box.text)
+
+              # Move token
+              move_token(@token)
 
               if @engine.placed
                 @token.show
               end
+
               refresh_log(@log)
             end
           end
