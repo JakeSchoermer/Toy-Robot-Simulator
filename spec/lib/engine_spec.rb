@@ -27,10 +27,17 @@ RSpec.describe do
   end
 
   describe '#left' do
-    it 'rotates left from North' do
+    it 'rotates left from South' do
       @engine.command('LEFT')
       expect(@engine.orientation).to eql 'WEST'
     end
+
+    it 'rotates left from West' do
+      @engine.command('PLACE 2,3,WEST')
+      @engine.command('LEFT')
+      expect(@engine.orientation).to eql 'SOUTH'
+    end
+
   end
 
   describe '#right' do
@@ -38,6 +45,13 @@ RSpec.describe do
       @engine.command('RIGHT')
       expect(@engine.orientation).to eql 'EAST'
     end
+
+    it 'rotates right from East' do
+      @engine.command('PLACE 2,3,EAST')
+      @engine.command('RIGHT')
+      expect(@engine.orientation).to eql 'SOUTH'
+    end
+
   end
 
   describe '#report' do
