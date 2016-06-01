@@ -23,11 +23,17 @@ The bundle process will install rspec. Once this has been done, you can run the 
 
 ## Development Notes
 
-I've tested this app on a Mac OSX 10.11 System. Whilst the tools are all cross-platform, I cannot guarantee at this point in time that the software will run perfectly on other OSs at this time.
+I've tested this app on a Mac OSX 10.11 system and in an Ubuntu 14.04 x64 VM. Whilst the tools are all cross-platform, I cannot guarantee at this point in time that the software will run perfectly on other OSs at this time.
 
 ## Credits
 
 Written by [Jake Schoermer](mailto:hello@jakeschoermer.me).
 
 
-![](/assets/screenshot.png) 
+### Mac
+
+![](/assets/screenshot.png)
+
+### Ubuntu
+
+![](/assets/screenshot_ubuntu.png) 
